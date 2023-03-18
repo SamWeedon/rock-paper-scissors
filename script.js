@@ -26,7 +26,6 @@ then must return a string that declares the winner of that round.
 The player's input must be made case-insensitive using .toLowerCase()
 */
 function playRound(playerChoice, computerChoice) {
-    playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
         console.log("Tie");
         return null;
@@ -68,15 +67,12 @@ function game() {
     for (let i = 0; i < 5; i++) {
         let computerChoice = getComputerChoice();
         let playerChoice = prompt("Rock, paper, or scissors?").toLowerCase();
-        let outcome = playRound(playerChoice, playerScore);
-        console.log(outcome);
+        let outcome = playRound(playerChoice, computerChoice);
         if (playerChoice === "rock" || playerChoice === "scissors" || playerChoice === "paper") {
             if (outcome === true) {
-                console.log(outcome);
                 playerScore++;
             }
             else if (outcome === false) {
-                console.log(outcome);
                 computerScore++;
             }
         }
