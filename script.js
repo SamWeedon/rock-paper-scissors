@@ -28,30 +28,72 @@ The player's input must be made case-insensitive using .toLowerCase()
 function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
-        return "Tie";
+        console.log("Tie");
+        return null;
     }
     else if (playerChoice === "rock" && computerChoice === "scissors") {
-        return "You win! Rock beats scissors";
+        console.log("You win! Rock beats scissors");
+        return true;
     }
     else if (playerChoice === "rock" && computerChoice === "paper") {
-        return "You lose! Paper beats rock";
+        console.log("You lose! Paper beats rock");
+        return false;
     }
     else if (playerChoice === "scissors" && computerChoice === "paper") {
-        return "You win! Scissors beats paper";
+        console.log("You win! Scissors beats paper");
+        return true;
     }
     else if (playerChoice === "scissors" && computerChoice === "rock") {
-        return "You lose! Rock beats scissors";
+        console.log("You lose! Rock beats scissors");
+        return false;
     }
     else if (playerChoice === "paper" && computerChoice === "rock") {
-        return "You win! Paper beats rock";
+        console.log("You win! Paper beats rock");
+        return true;
     }
     else if (playerChoice === "paper" && computerChoice === "scissors") {
-        return "You lose! Scissors beats paper";
+        console.log("You lose! Scissors beats paper");
+        return false;
     }
 
 }
 
-const playerChoice = "rOck";
-const computerChoice = getComputerChoice();
-console.log(computerChoice);
-console.log(playRound(playerChoice, computerChoice));
+/*
+This function must call the playRound() function five times. It
+also must keep score and report the winner.
+*/
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        let computerChoice = getComputerChoice();
+        let playerChoice = prompt("Rock, paper, or scissors?").toLowerCase();
+        let outcome = playRound(playerChoice, playerScore);
+        console.log(outcome);
+        if (playerChoice === "rock" || playerChoice === "scissors" || playerChoice === "paper") {
+            if (outcome === true) {
+                console.log(outcome);
+                playerScore++;
+            }
+            else if (outcome === false) {
+                console.log(outcome);
+                computerScore++;
+            }
+        }
+        else {
+            console.log("This is not a valid response");
+            i--;
+        }
+    }
+    if (playerScore > computerScore) {
+        console.log("You win overall!");
+    }
+    else if (playerScore < computerScore) {
+        console.log("You lose overall!");
+    }
+    else if (playerScore === computerScore) {
+        console.log("There is an overall tie!");
+    }
+}
+
+game();
