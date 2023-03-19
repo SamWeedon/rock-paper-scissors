@@ -1,7 +1,7 @@
 /*
-This function must return either rock, paper, or scissors randomly.
-I can use the Math.random() function to return a random decimal between
-0 (inclusive) and 1 (exclusive). I can approximate a random choice
+This function returns either rock, paper, or scissors randomly.
+I use the Math.random() function to return a random decimal between
+0 (inclusive) and 1 (exclusive). I then approximate a random choice
 of rock, paper, or scissors by assigning each choice a third of this
 range in probability.
 */
@@ -20,12 +20,15 @@ function getComputerChoice() {
 }
 
 /*
-This function must play a single round, taking two parameters, one
+This function plays a single round, taking two parameters, one
 being the player's choice, and one being the computer's choice. It
-then must return a string that declares the winner of that round.
-The player's input must be made case-insensitive using .toLowerCase()
+then logs the outcome to the console and returns a boolean value
+that represents a win or loss for the player, true being a win
+and false being a loss.
+The player's input is made case-insensitive using .toLowerCase()
 */
 function playRound(playerChoice, computerChoice) {
+    playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
         console.log("Tie");
         return null;
@@ -58,8 +61,12 @@ function playRound(playerChoice, computerChoice) {
 }
 
 /*
-This function must call the playRound() function five times. It
-also must keep score and report the winner.
+This function plays five rounds of the game by calling the playRound()
+function five times using a for-loop. It keeps track of the individual 
+scores by incrementing respective variables when appropriate and 
+then reports the overall winner at the end of the five rounds. If the
+player inputs an invalid choice, a warning is logged and the loop 
+"repeats" the round.
 */
 function game() {
     let playerScore = 0;
