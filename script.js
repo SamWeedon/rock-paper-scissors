@@ -60,6 +60,33 @@ function playRound(playerChoice, computerChoice) {
 
 }
 
+const body = document.querySelector('body');
+
+const rock = document.createElement('button');
+rock.textContent = 'Rock';
+rock.classList.add('rock');
+
+body.appendChild(rock);
+
+const paper = document.createElement('button');
+paper.textContent = 'Paper';
+paper.classList.add('paper');
+
+body.appendChild(paper);
+
+const scissors = document.createElement('button');
+scissors.textContent = "Scissors";
+scissors.classList.add('scissors');
+
+body.appendChild(scissors);
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => playRound(button.className, getComputerChoice()));
+});
+
+
 /*
 This function plays five rounds of the game by calling the playRound()
 function five times using a for-loop. It keeps track of the individual 
@@ -67,7 +94,7 @@ scores by incrementing respective variables when appropriate and
 then reports the overall winner at the end of the five rounds. If the
 player inputs an invalid choice, a warning is logged and the loop 
 "repeats" the round.
-*/
+
 function game() {
     let playerScore = 0;
     let computerScore = 0;
@@ -100,3 +127,4 @@ function game() {
 }
 
 game();
+*/
