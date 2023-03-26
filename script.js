@@ -30,31 +30,31 @@ The player's input is made case-insensitive using .toLowerCase()
 function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
-        console.log("Tie");
+        results.textContent = "Tie";
         return null;
     }
     else if (playerChoice === "rock" && computerChoice === "scissors") {
-        console.log("You win! Rock beats scissors");
+        results.textContent = "You win! Rock beats scissors";
         return true;
     }
     else if (playerChoice === "rock" && computerChoice === "paper") {
-        console.log("You lose! Paper beats rock");
+        results.textContent = "You lose! Paper beats rock";
         return false;
     }
     else if (playerChoice === "scissors" && computerChoice === "paper") {
-        console.log("You win! Scissors beats paper");
+        results.textContent = "You win! Scissors beats paper";
         return true;
     }
     else if (playerChoice === "scissors" && computerChoice === "rock") {
-        console.log("You lose! Rock beats scissors");
+        results.textContent = "You lose! Rock beats scissors";
         return false;
     }
     else if (playerChoice === "paper" && computerChoice === "rock") {
-        console.log("You win! Paper beats rock");
+        results.textContent = "You win! Paper beats rock";
         return true;
     }
     else if (playerChoice === "paper" && computerChoice === "scissors") {
-        console.log("You lose! Scissors beats paper");
+        results.textContent = "You lose! Scissors beats paper";
         return false;
     }
 
@@ -80,11 +80,17 @@ scissors.classList.add('scissors');
 
 body.appendChild(scissors);
 
+const results = document.createElement('div');
+results.classList.add('results');
+
+body.appendChild(results);
+
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => playRound(button.className, getComputerChoice()));
 });
+
 
 
 /*
