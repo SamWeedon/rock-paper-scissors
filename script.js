@@ -31,6 +31,7 @@ function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
         results.textContent = "Tie";
+        return null;
     }
     else if (playerChoice === "rock" && computerChoice === "scissors") {
         results.textContent = "You win! Rock beats scissors";
@@ -118,26 +119,36 @@ body.appendChild(finalResults);
 
 const buttons = document.querySelectorAll('button');
 
+function buttonRound(button) { 
+        let roundResult = playRound(button.className, getComputerChoice());
+        console.log(roundResult);
+        
+        if (roundResult === true) {
+            finalResults.textContent = "You win overall";
+            button.removeEventListener
+        }
+        else if (roundResult === false) {
+            finalResults.textContent = "You lose overall";
+            return;
+        }
+}
+
 buttons.forEach((button) => {
     button.addEventListener('click', () => { 
-        if (playRound(button.className, getComputerChoice()) === true) {
+        let roundResult = playRound(button.className, getComputerChoice());
+        console.log(roundResult);
+        
+        if (roundResult === true) {
             finalResults.textContent = "You win overall";
+            button.removeEventListener()
         }
-        else if (playRound(button.className, getComputerChoice()) === false) {
+        else if (roundResult === false) {
             finalResults.textContent = "You lose overall";
+            return;
         }
-
-            
+        
     });
 });
-
-
-if (pScore === 5) {
-    finalResults.textContent = "You win overall!";
-}
-if (cScore === 5) {
-    finalResults.textContent = "The computer wins overall!";
-}
 
 
 
