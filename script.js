@@ -31,31 +31,42 @@ function playRound(playerChoice, computerChoice) {
     playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
         results.textContent = "Tie";
-        return null;
     }
     else if (playerChoice === "rock" && computerChoice === "scissors") {
         results.textContent = "You win! Rock beats scissors";
-        return true;
+        pScore++;
+        playerScore.textContent = `Your score is ${pScore}`;
+        if (pScore === 5) return true;
     }
     else if (playerChoice === "rock" && computerChoice === "paper") {
         results.textContent = "You lose! Paper beats rock";
-        return false;
+        cScore++;
+        computerScore.textContent = `The computer's score is ${cScore}`;
+        if (cScore === 5) return false;
     }
     else if (playerChoice === "scissors" && computerChoice === "paper") {
         results.textContent = "You win! Scissors beats paper";
-        return true;
+        pScore++;
+        playerScore.textContent = `Your score is ${pScore}`;
+        if (pScore === 5) return true;
     }
     else if (playerChoice === "scissors" && computerChoice === "rock") {
         results.textContent = "You lose! Rock beats scissors";
-        return false;
+        cScore++;
+        computerScore.textContent = `The computer's score is ${cScore}`;
+        if (cScore === 5) return false;
     }
     else if (playerChoice === "paper" && computerChoice === "rock") {
         results.textContent = "You win! Paper beats rock";
-        return true;
+        pScore++;
+        playerScore.textContent = `Your score is ${pScore}`;
+        if (pScore === 5) return true;
     }
     else if (playerChoice === "paper" && computerChoice === "scissors") {
         results.textContent = "You lose! Scissors beats paper";
-        return false;
+        cScore++;
+        computerScore.textContent = `The computer's score is ${cScore}`;
+        if (cScore === 5) return false;
     }
 
 }
@@ -85,11 +96,48 @@ results.classList.add('results');
 
 body.appendChild(results);
 
+const playerScore = document.createElement('div');
+playerScore.classList.add('playerScore');
+
+body.appendChild(playerScore);
+
+const computerScore = document.createElement('div');
+computerScore.classList.add('computerScore');
+
+body.appendChild(computerScore);
+
+let pScore = 0;
+let cScore = 0;
+playerScore.textContent = `Your score is ${pScore}`;
+computerScore.textContent = `The computer's score is ${cScore}`;
+
+const finalResults = document.createElement('div');
+finalResults.classList.add('finalResults');
+
+body.appendChild(finalResults);
+
 const buttons = document.querySelectorAll('button');
 
 buttons.forEach((button) => {
-    button.addEventListener('click', () => playRound(button.className, getComputerChoice()));
+    button.addEventListener('click', () => { 
+        if (playRound(button.className, getComputerChoice()) === true) {
+            finalResults.textContent = "You win overall";
+        }
+        else if (playRound(button.className, getComputerChoice()) === false) {
+            finalResults.textContent = "You lose overall";
+        }
+
+            
+    });
 });
+
+
+if (pScore === 5) {
+    finalResults.textContent = "You win overall!";
+}
+if (cScore === 5) {
+    finalResults.textContent = "The computer wins overall!";
+}
 
 
 
