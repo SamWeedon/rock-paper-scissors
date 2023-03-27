@@ -22,13 +22,11 @@ function getComputerChoice() {
 /*
 This function plays a single round, taking two parameters, one
 being the player's choice, and one being the computer's choice. It
-then logs the outcome to the console and returns a boolean value
-that represents a win or loss for the player, true being a win
-and false being a loss.
-The player's input is made case-insensitive using .toLowerCase()
+then displays the result and increments scores accordingly. Once the
+player or computer reaches a score of five it returns true or false
+respectively.
 */
 function playRound(playerChoice, computerChoice) {
-    playerChoice = playerChoice.toLowerCase();
     if (playerChoice === computerChoice) {
         results.textContent = "Tie";
         return null;
@@ -117,79 +115,31 @@ finalResults.classList.add('finalResults');
 
 body.appendChild(finalResults);
 
+//creates a nodelist for the buttons
 const buttons = document.querySelectorAll('button');
 
-function buttonRound(button) { 
-        let roundResult = playRound(button.className, getComputerChoice());
-        console.log(roundResult);
-        
-        if (roundResult === true) {
-            finalResults.textContent = "You win overall";
-            button.removeEventListener
-        }
-        else if (roundResult === false) {
-            finalResults.textContent = "You lose overall";
-            return;
-        }
-}
-
+/*
+adds an event listener to each button for a click event. When
+a button is clicked, a round is played with the corresponding
+input. Once an overall winner is determined, the result is
+displayed and event listener propagation is stopped.
+*/
 buttons.forEach((button) => {
-    button.addEventListener('click', () => { 
+    button.addEventListener('click', function() { 
         let roundResult = playRound(button.className, getComputerChoice());
-        console.log(roundResult);
         
         if (roundResult === true) {
             finalResults.textContent = "You win overall";
-            button.removeEventListener()
+            window.addEventListener('click', function(event) {
+                event.stopImmediatePropagation();
+            }, true);
         }
         else if (roundResult === false) {
             finalResults.textContent = "You lose overall";
-            return;
+            window.addEventListener('click', function(event) {
+                event.stopImmediatePropagation();
+            }, true);
         }
         
     });
 });
-
-
-
-/*
-This function plays five rounds of the game by calling the playRound()
-function five times using a for-loop. It keeps track of the individual 
-scores by incrementing respective variables when appropriate and 
-then reports the overall winner at the end of the five rounds. If the
-player inputs an invalid choice, a warning is logged and the loop 
-"repeats" the round.
-
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let computerChoice = getComputerChoice();
-        let playerChoice = prompt("Rock, paper, or scissors?").toLowerCase();
-        let outcome = playRound(playerChoice, computerChoice);
-        if (playerChoice === "rock" || playerChoice === "scissors" || playerChoice === "paper") {
-            if (outcome === true) {
-                playerScore++;
-            }
-            else if (outcome === false) {
-                computerScore++;
-            }
-        }
-        else {
-            console.log("This is not a valid response");
-            i--;
-        }
-    }
-    if (playerScore > computerScore) {
-        console.log("You win overall!");
-    }
-    else if (playerScore < computerScore) {
-        console.log("You lose overall!");
-    }
-    else if (playerScore === computerScore) {
-        console.log("There is an overall tie!");
-    }
-}
-
-game();
-*/
